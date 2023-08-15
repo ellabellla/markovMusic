@@ -37,7 +37,13 @@ def generate_chain(extracted_notes, tracks):
                     if key not in markov_chain:
                         markov_chain[key] = []
                     markov_chain[key].extend(part[i+1])
-                    
+        else:
+            print(f"unknown track: {track}")
+            
+    if not markov_chain:
+        print("tracks were empty")
+        exit()
+        
     return markov_chain
 
 def play(bpm, markov_chain):

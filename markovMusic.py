@@ -68,20 +68,21 @@ def main():
     parser.add_argument('filename')
     
     args = parser.parse_args()
-    
-    (track_names, notes) = extract_notes(args.filename)
-    if args.list:
-        for i, track_names in enumerate(track_names):
-            print(f"{i}: {track_names}")
-        exit()
+    try:
+        (track_names, notes) = extract_notes(args.filename)
+        if args.list:
+            for i, track_names in enumerate(track_names):
+                print(f"{i}: {track_names}")
+            exit()
 
-    tracks = [i for i in range(len(notes))]
-    if args.tracks != None:
-        tracks = [int(num) for num in args.tracks.split(" ")]
+        tracks = [i for i in range(len(notes))]
+        if args.tracks != None:
+            tracks = [int(num) for num in args.tracks.split(" ")]
 
-    markov_chain = generate_chain(notes, tracks)
-    play(args.bpm, markov_chain)
-
+        markov_chain = generate_chain(notes, tracks)
+        play(args.bpm, markov_chain)
+    except KeyboardInterrupt:
+        print("\nExiting")
 
 if __name__ == "__main__":
     main()

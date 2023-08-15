@@ -14,7 +14,7 @@ def extract_notes(path):
         track_names.append(part.partName)
         notes = []
         prev_offset = 0
-        for note in part.recurse().notes.stream():                 #Let's loop through the notes iterator and create a list with pitch.duration
+        for note in part.recurse().notes.stream():
             dur = float(note.duration.quarterLength)
             offset = float(note.offset)
             pits = [(pit.midi, dur, offset-prev_offset) for pit in note.pitches]
